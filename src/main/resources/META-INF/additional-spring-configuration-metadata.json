@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "weclean.importfile",
+      "type": "java.lang.String",
+      "description": "JSON data file path"
+  }
+] }
