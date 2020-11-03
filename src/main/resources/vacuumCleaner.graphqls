@@ -1,0 +1,18 @@
+schema {
+    query: Query
+}
+
+type Query {
+    vacuumCleaners(count: Int):[VacuumCleaner]
+    vacuumCleaner(id:  ID):VacuumCleaner
+}
+
+type VacuumCleaner {
+    id:  ID!,
+    model: String,
+    manufacturer: String,
+    price: Float,
+}
+type Mutation {
+    createVacuumCleaner(model: String, manufacturer: String, price: Float):VacuumCleaner
+}

@@ -1,16 +1,16 @@
 package com.example.weclean.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import java.util.Objects;
+import java.io.Serializable;
 
 @Entity
-public class VacuumCLeaner {
+public class VacuumCleaner implements Serializable {
     @Id
-private String code;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+private int id;
 
 @Column
     private String model;
@@ -23,7 +23,7 @@ private String code;
 @Max(7000)
     private Float price;
 
-@Column
+/*@Column
 private String construction;
 
 @Column
@@ -51,20 +51,19 @@ private String cleaningFeatures;
     private Float weight;
 
 @Column
-    private Float noiseLevel;
+    private Float noiseLevel;*/
 
 
-protected VacuumCLeaner(){}
+protected VacuumCleaner(){}
 
-public VacuumCLeaner(String code, String model, String manufacturer,
-                     Float price, String construction, String cleaningFeatures,
+public VacuumCleaner(String model, String manufacturer,
+                     Float price/*, String construction, String cleaningFeatures,
                      String dustCollectorType, Float volumeOfDustCollector, Integer powerConsumption,
-                     String powerSource, String color, Float powerCordLength, Float weight, Float noiseLevel){
-    this.code = code;
+                     String powerSource, String color, Float powerCordLength, Float weight, Float noiseLevel*/){
     this.model = model;
     this.manufacturer = manufacturer;
     this.price=price;
-    this.construction=construction;
+    /*this.construction=construction;
     this.cleaningFeatures =cleaningFeatures;
     this.dustCollectorType = dustCollectorType;
     this.volumeOfDustCollector = volumeOfDustCollector;
@@ -73,12 +72,12 @@ public VacuumCLeaner(String code, String model, String manufacturer,
     this.color=color;
     this.powerCordLength=powerCordLength;
     this.weight=weight;
-    this.noiseLevel=noiseLevel;
+    this.noiseLevel=noiseLevel;*/
 }
 
 
-    public String getCode() {
-        return code;
+    public int getId() {
+        return id;
     }
 
     public String getModel() {
@@ -105,7 +104,7 @@ public VacuumCLeaner(String code, String model, String manufacturer,
         this.price = price;
     }
 
-    public String getConstruction() {
+    /*public String getConstruction() {
         return construction;
     }
 
@@ -185,17 +184,17 @@ public VacuumCLeaner(String code, String model, String manufacturer,
         this.noiseLevel = noiseLevel;
     }
 
-
+*/
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        VacuumCLeaner vc = (VacuumCLeaner) o;
-        return Objects.equals(code, vc.code) &&
+        VacuumCleaner vc = (VacuumCleaner) o;
+        return Objects.equals(id, vc.id) &&
                 Objects.equals(model, vc.model) &&
                 Objects.equals(manufacturer, vc.manufacturer) &&
-                Objects.equals(construction, vc.construction) &&
-                Objects.equals(price, vc.price) &&
+           /*     Objects.equals(construction, vc.construction) &&*/
+                Objects.equals(price, vc.price)/* &&
                 Objects.equals(cleaningFeatures, vc.cleaningFeatures) &&
                 Objects.equals(dustCollectorType, vc.dustCollectorType) &&
                 Objects.equals(volumeOfDustCollector, vc.volumeOfDustCollector) &&
@@ -204,17 +203,17 @@ public VacuumCLeaner(String code, String model, String manufacturer,
                 Objects.equals(color, vc.color) &&
                 Objects.equals(powerCordLength, vc.powerCordLength) &&
                 Objects.equals(weight, vc.weight) &&
-                Objects.equals(noiseLevel, vc.noiseLevel);
+                Objects.equals(noiseLevel, vc.noiseLevel)*/;
     }
 
     @Override
     public String toString() {
         return "VacuumCleaner{" +
-                "code='" + code + '\'' +
+                "id='" + id + '\'' +
                 ", model='" + model + '\'' +
                 ", manufacturer='" + manufacturer + '\'' +
                 ", price=" + price +
-                ", construction='" + construction + '\'' +
+              /*  ", construction='" + construction + '\'' +
                 ", cleaningFeatures='" + cleaningFeatures + '\'' +
                 ", dustCollectorType='" + dustCollectorType + '\'' +
                 ", volumeOfDustCollector=" + volumeOfDustCollector +
@@ -223,15 +222,15 @@ public VacuumCLeaner(String code, String model, String manufacturer,
                 ", color='" + color + '\'' +
                 ", powerCordLength=" + powerCordLength +
                 ", weight=" + weight +
-                ", noiseLevel=" + noiseLevel +
+                ", noiseLevel=" + noiseLevel +*/
                 '}';
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(code, model, manufacturer,
-                price, construction, cleaningFeatures,
+        return Objects.hash(id, model, manufacturer,
+                price/*, construction, cleaningFeatures,
                 dustCollectorType, volumeOfDustCollector, powerConsumption,
-                powerSource, color, powerCordLength, weight, noiseLevel);
+                powerSource, color, powerCordLength, weight, noiseLevel*/);
     }
 }

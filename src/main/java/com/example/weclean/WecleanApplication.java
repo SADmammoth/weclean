@@ -17,8 +17,8 @@ import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
 import static com.fasterxml.jackson.annotation.PropertyAccessor.FIELD;
 
 @SpringBootApplication
-public class WecleanApplication implements CommandLineRunner {
-	@Value("${weclean.importfile}")
+public class WecleanApplication implements CommandLineRunner{
+	@Value("${importfile}")
 	private String importFile;
 
 	@Autowired
@@ -35,10 +35,10 @@ public class WecleanApplication implements CommandLineRunner {
 
 	private void createVacuumCleaners(String fileToImport) throws IOException {
 		VCFromFile.read(fileToImport).forEach(importedVC ->
-				vacuumCleanerService.createVacuumCleaner(importedVC.getCode(),
+				vacuumCleanerService.createVacuumCleaner(
 						importedVC.getModel(),
 						importedVC.getManufacturer(),
-						importedVC.getPrice(),
+						importedVC.getPrice()/*,
 						importedVC.getConstruction(),
 						importedVC.getCleaningFeatures(),
 						importedVC.getDustCollectorType(),
@@ -48,24 +48,20 @@ public class WecleanApplication implements CommandLineRunner {
 						importedVC.getColor(),
 						importedVC.getPowerCordLength(),
 						importedVC.getWeight(),
-						importedVC.getNoiseLevel()));
+						importedVC.getNoiseLevel()*/));
 	}
 
 	private static class VCFromFile {
-		private String code, model, manufacturer,
-						price, construction, cleaningFeatures,
+		private String model, manufacturer,
+						price/*, construction, cleaningFeatures,
 						dustCollectorType, volumeOfDustCollector, powerConsumption,
-						powerSource, color, powerCordLength, weight, noiseLevel;
+						powerSource, color, powerCordLength, weight, noiseLevel*/;
 
 		static List<VCFromFile> read(String fileToImport) throws IOException {
 			return new ObjectMapper().setVisibility(FIELD, ANY).
 					readValue(new FileInputStream(fileToImport), new TypeReference<List<VCFromFile>>() {});
 		}
 		protected VCFromFile(){}
-
-		public String getCode() {
-			return code;
-		}
 
 		public String getModel() {
 			return model;
@@ -78,7 +74,7 @@ public class WecleanApplication implements CommandLineRunner {
 		public Float getPrice() {
 			return Float.parseFloat(price);
 		}
-
+/*
 		public String getConstruction() {
 			return construction;
 		}
@@ -117,6 +113,6 @@ public class WecleanApplication implements CommandLineRunner {
 
 		public Float getNoiseLevel() {
 			return Float.parseFloat(noiseLevel);
-		}
+		}*/
 	}
 }
