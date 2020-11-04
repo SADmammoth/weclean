@@ -26,6 +26,7 @@ public class WecleanApplication implements CommandLineRunner{
 
 	public static void main(String[] args) {
 		SpringApplication.run(WecleanApplication.class, args);
+
 	}
 
 	@Override
@@ -38,7 +39,7 @@ public class WecleanApplication implements CommandLineRunner{
 				vacuumCleanerService.createVacuumCleaner(
 						importedVC.getModel(),
 						importedVC.getManufacturer(),
-						importedVC.getPrice()/*,
+						importedVC.getPrice(),
 						importedVC.getConstruction(),
 						importedVC.getCleaningFeatures(),
 						importedVC.getDustCollectorType(),
@@ -48,14 +49,14 @@ public class WecleanApplication implements CommandLineRunner{
 						importedVC.getColor(),
 						importedVC.getPowerCordLength(),
 						importedVC.getWeight(),
-						importedVC.getNoiseLevel()*/));
+						importedVC.getNoiseLevel()));
 	}
 
 	private static class VCFromFile {
 		private String model, manufacturer,
-						price/*, construction, cleaningFeatures,
+						price, construction, cleaningFeatures,
 						dustCollectorType, volumeOfDustCollector, powerConsumption,
-						powerSource, color, powerCordLength, weight, noiseLevel*/;
+						powerSource, color, powerCordLength, weight, noiseLevel;
 
 		static List<VCFromFile> read(String fileToImport) throws IOException {
 			return new ObjectMapper().setVisibility(FIELD, ANY).
@@ -74,7 +75,6 @@ public class WecleanApplication implements CommandLineRunner{
 		public Float getPrice() {
 			return Float.parseFloat(price);
 		}
-/*
 		public String getConstruction() {
 			return construction;
 		}
@@ -113,6 +113,6 @@ public class WecleanApplication implements CommandLineRunner{
 
 		public Float getNoiseLevel() {
 			return Float.parseFloat(noiseLevel);
-		}*/
+		}
 	}
 }
