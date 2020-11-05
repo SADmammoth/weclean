@@ -1,5 +1,6 @@
 package com.example.weclean.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
 import io.leangen.graphql.annotations.*;
 import io.leangen.graphql.annotations.types.GraphQLType;
@@ -21,58 +22,62 @@ public class VacuumCleaner implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Getter
-private int id;
+    private int id;
 
-@Column
-@NonNull
+    public ImagesList getImagesList() {
+        return new ImagesList(id);
+    }
+
+    @Column
+    @NonNull
     private String model;
 
-@Column
-@NonNull
+    @Column
+    @NonNull
     private String manufacturer;
 
-@Column
-@NonNull
+    @Column
+    @NonNull
     private Float price;
 
-@Column
-@NonNull
-    private  String construction;
+    @Column
+    @NonNull
+    private String construction;
 
-@Column
-@NonNull
+    @Column
+    @NonNull
     private String cleaningFeatures;
 
-@Column
-@NonNull
+    @Column
+    @NonNull
     private String dustCollectorType;
 
-@Column
-@NonNull
+    @Column
+    @NonNull
     private Float volumeOfDustCollector;
 
-@Column
-@NonNull
+    @Column
+    @NonNull
     private Integer powerConsumption;
 
-@Column
-@NonNull
+    @Column
+    @NonNull
     private String powerSource;
 
-@Column
-@NonNull
+    @Column
+    @NonNull
     private String color;
 
-@Column
-@NonNull
+    @Column
+    @NonNull
     private Float powerCordLength;
 
-@Column
-@NonNull
+    @Column
+    @NonNull
     private Float weight;
 
-@Column
-@NonNull
+    @Column
+    @NonNull
     private Float noiseLevel;
 
 }
