@@ -40,7 +40,7 @@ public class WecleanApplication implements CommandLineRunner{
 				vacuumCleanerService.createVacuumCleaner(
 						importedVC.getModel(),
 						importedVC.getManufacturer(),
-						importedVC.getPrice()/*,
+						importedVC.getPrice(),
 						importedVC.getConstruction(),
 						importedVC.getCleaningFeatures(),
 						importedVC.getDustCollectorType(),
@@ -50,14 +50,14 @@ public class WecleanApplication implements CommandLineRunner{
 						importedVC.getColor(),
 						importedVC.getPowerCordLength(),
 						importedVC.getWeight(),
-						importedVC.getNoiseLevel()*/));
+						importedVC.getNoiseLevel()));
 	}
 
 	private static class VCFromFile {
 		private String model, manufacturer,
-						price/*, construction, cleaningFeatures,
+						price, construction, cleaningFeatures,
 						dustCollectorType, volumeOfDustCollector, powerConsumption,
-						powerSource, color, powerCordLength, weight, noiseLevel*/;
+						powerSource, color, powerCordLength, weight, noiseLevel;
 
 		static List<VCFromFile> read(String fileToImport) throws IOException {
 			return new ObjectMapper().setVisibility(FIELD, ANY).
@@ -76,7 +76,7 @@ public class WecleanApplication implements CommandLineRunner{
 		public Double getPrice() {
 			return Double.parseDouble(price);
 		}
-	/*	public String getConstruction() {
+		public String getConstruction() {
 			return construction;
 		}
 
@@ -92,8 +92,8 @@ public class WecleanApplication implements CommandLineRunner{
 			return Double.parseDouble(volumeOfDustCollector);
 		}
 
-		public Integer getPowerConsumption() {
-			return Integer.parseInt(powerConsumption);
+		public Double getPowerConsumption() {
+			return Double.parseDouble(powerConsumption);
 		}
 
 		public String getPowerSource() {
@@ -114,6 +114,6 @@ public class WecleanApplication implements CommandLineRunner{
 
 		public Double getNoiseLevel() {
 			return Double.parseDouble(noiseLevel);
-		}*/
+		}
 	}
 }

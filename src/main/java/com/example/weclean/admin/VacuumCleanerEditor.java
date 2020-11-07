@@ -32,10 +32,20 @@ public class VacuumCleanerEditor extends VerticalLayout implements KeyNotifier {
     TextField model = new TextField("Model");
     TextField manufacturer = new TextField("Manufacturer");
     NumberField price = new NumberField("Price");
+    TextField construction  = new TextField("Construction");
+    TextField cleaningFeatures = new TextField("Cleaning Features");
+    TextField dustCollectorType = new TextField("Dust Collector Type");
+    NumberField volumeOfDustCollector = new NumberField("Volume Of Dust Collector");;
+    NumberField powerConsumption = new NumberField("Power Consumption");
+    TextField powerSource = new TextField("Power Source");
+    TextField color = new TextField("Color");
+    NumberField powerCordLength = new NumberField("Power Cord Length");
+    NumberField weight = new NumberField("Weight");
+    NumberField noiseLevel = new NumberField("Noise Level");
 
     Button hide = new Button("", VaadinIcon.CLOSE.create(), e->setVisible(false));
 
-    FormLayout formLayout = new FormLayout(model, manufacturer, price);
+    FormLayout formLayout = new FormLayout(model, manufacturer, price,construction, cleaningFeatures, dustCollectorType, volumeOfDustCollector, powerConsumption, powerSource, color, powerCordLength, weight, noiseLevel);
 
     Button save = new Button("Save");
     Button cancel = new Button("Cancel");
@@ -52,6 +62,9 @@ public class VacuumCleanerEditor extends VerticalLayout implements KeyNotifier {
 
         setMinWidth("25vw");
         setMaxWidth("40vw");
+
+        formLayout.getStyle().set("overflow-y", "auto");
+        formLayout.setMaxHeight("60vh");
 
         add(hide, formLayout, actions);
 
