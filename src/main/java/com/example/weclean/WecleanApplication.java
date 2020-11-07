@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -39,7 +40,7 @@ public class WecleanApplication implements CommandLineRunner{
 				vacuumCleanerService.createVacuumCleaner(
 						importedVC.getModel(),
 						importedVC.getManufacturer(),
-						importedVC.getPrice(),
+						importedVC.getPrice()/*,
 						importedVC.getConstruction(),
 						importedVC.getCleaningFeatures(),
 						importedVC.getDustCollectorType(),
@@ -49,14 +50,14 @@ public class WecleanApplication implements CommandLineRunner{
 						importedVC.getColor(),
 						importedVC.getPowerCordLength(),
 						importedVC.getWeight(),
-						importedVC.getNoiseLevel()));
+						importedVC.getNoiseLevel()*/));
 	}
 
 	private static class VCFromFile {
 		private String model, manufacturer,
-						price, construction, cleaningFeatures,
+						price/*, construction, cleaningFeatures,
 						dustCollectorType, volumeOfDustCollector, powerConsumption,
-						powerSource, color, powerCordLength, weight, noiseLevel;
+						powerSource, color, powerCordLength, weight, noiseLevel*/;
 
 		static List<VCFromFile> read(String fileToImport) throws IOException {
 			return new ObjectMapper().setVisibility(FIELD, ANY).
@@ -72,10 +73,10 @@ public class WecleanApplication implements CommandLineRunner{
 			return manufacturer;
 		}
 
-		public Float getPrice() {
-			return Float.parseFloat(price);
+		public Double getPrice() {
+			return Double.parseDouble(price);
 		}
-		public String getConstruction() {
+	/*	public String getConstruction() {
 			return construction;
 		}
 
@@ -87,8 +88,8 @@ public class WecleanApplication implements CommandLineRunner{
 			return dustCollectorType;
 		}
 
-		public Float getVolumeOfDustCollector() {
-			return Float.parseFloat(volumeOfDustCollector);
+		public Double getVolumeOfDustCollector() {
+			return Double.parseDouble(volumeOfDustCollector);
 		}
 
 		public Integer getPowerConsumption() {
@@ -103,16 +104,16 @@ public class WecleanApplication implements CommandLineRunner{
 			return color;
 		}
 
-		public Float getPowerCordLength() {
-			return Float.parseFloat(powerCordLength);
+		public Double getPowerCordLength() {
+			return Double.parseDouble(powerCordLength);
 		}
 
-		public Float getWeight() {
-			return Float.parseFloat(weight);
+		public Double getWeight() {
+			return Double.parseDouble(weight);
 		}
 
-		public Float getNoiseLevel() {
-			return Float.parseFloat(noiseLevel);
-		}
+		public Double getNoiseLevel() {
+			return Double.parseDouble(noiseLevel);
+		}*/
 	}
 }

@@ -38,8 +38,8 @@ public class VacuumCleaner implements Serializable {
 
     @Column
     @NonNull
-    private Float price;
-
+    private Double price;
+/*
     @Column
     @NonNull
     private String construction;
@@ -54,7 +54,7 @@ public class VacuumCleaner implements Serializable {
 
     @Column
     @NonNull
-    private Float volumeOfDustCollector;
+    private Double volumeOfDustCollector;
 
     @Column
     @NonNull
@@ -70,14 +70,14 @@ public class VacuumCleaner implements Serializable {
 
     @Column
     @NonNull
-    private Float powerCordLength;
+    private Double powerCordLength;
 
     @Column
     @NonNull
-    private Float weight;
+    private Double weight;
 
     @Column
     @NonNull
-    private Float noiseLevel;
+    private Double noiseLevel;*/
 
 }

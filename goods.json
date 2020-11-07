@@ -1,44 +1,14 @@
 [{
   "model": "SC4520 (VCC4520S3S/XEV)",
   "manufacturer": "Samsung",
-  "price": 159.0,
-  "construction": "vacuum cleaner",
-  "cleaningFeatures": "dry",
-  "dustCollectorType": "container",
-  "volumeOfDustCollector": 1.3,
-  "powerConsumption": 1600,
-  "powerSource": "network",
-  "color": "white",
-  "powerCordLength": 6,
-  "weight": 4.3,
-  "noiseLevel": 82
+  "price": 159.0
 },{
   "model": "DX 700",
   "manufacturer": "Deerma",
-  "price": 115,
-  "construction": "vertical portable vacuum cleaner",
-  "cleaningFeatures": "dry",
-  "dustCollectorType": "container",
-  "volumeOfDustCollector": 0.8,
-  "powerConsumption": 600,
-  "powerSource": "network",
-  "color": "white",
-  "powerCordLength": 4.5,
-  "weight": 2.2,
-  "noiseLevel": 70
+  "price": 115
 },
   {
   "model": "SC20M2560JP (VC20M2560JP/EV)",
   "manufacturer": "Samsung",
-  "price": 259,
-  "construction": "vacuum cleaner",
-  "cleaningFeatures": "dry",
-  "dustCollectorType": "bag",
-  "volumeOfDustCollector": 2.5,
-  "powerConsumption": 2000,
-  "powerSource": "network",
-  "color": "purple",
-  "powerCordLength": 6,
-  "weight": 4.3,
-  "noiseLevel": 83
+  "price": 259
 }]

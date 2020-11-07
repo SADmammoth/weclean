@@ -25,10 +25,10 @@ public class VacuumCleanerService {
     @Transactional
     @GraphQLMutation
     public VacuumCleaner createVacuumCleaner( @GraphQLNonNull String model,  @GraphQLNonNull String manufacturer,
-                                              @GraphQLNonNull Float price,  @GraphQLNonNull String construction,  @GraphQLNonNull String cleaningFeatures,
-                                              @GraphQLNonNull String dustCollectorType,  @GraphQLNonNull Float volumeOfDustCollector,  @GraphQLNonNull Integer powerConsumption,
-                                              @GraphQLNonNull String powerSource, @GraphQLNonNull  String color,  @GraphQLNonNull Float powerCordLength,  @GraphQLNonNull Float weight,  @GraphQLNonNull Float noiseLevel){
-        return vacuumCleanerRepository.save(new VacuumCleaner(model, manufacturer, price, construction, cleaningFeatures, dustCollectorType, volumeOfDustCollector, powerConsumption, powerSource, color, powerCordLength, weight, noiseLevel));
+                                              @GraphQLNonNull Double price/*,  @GraphQLNonNull String construction,  @GraphQLNonNull String cleaningFeatures,
+                                              @GraphQLNonNull String dustCollectorType,  @GraphQLNonNull Double volumeOfDustCollector,  @GraphQLNonNull Integer powerConsumption,
+                                              @GraphQLNonNull String powerSource, @GraphQLNonNull  String color,  @GraphQLNonNull Double powerCordLength,  @GraphQLNonNull Double weight,  @GraphQLNonNull Double noiseLevel*/){
+        return vacuumCleanerRepository.save(new VacuumCleaner(model, manufacturer, price/*, construction, cleaningFeatures, dustCollectorType, volumeOfDustCollector, powerConsumption, powerSource, color, powerCordLength, weight, noiseLevel*/));
     }
 
     @Transactional(readOnly = true)
