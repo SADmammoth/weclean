@@ -1,15 +1,15 @@
 package com.example.weclean.domain;
 
-import com.example.weclean.domain.enums.CleaningFeatures;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.sun.istack.NotNull;
-import io.leangen.graphql.annotations.*;
-import io.leangen.graphql.annotations.types.GraphQLType;
-import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
+import com.example.weclean.domain.enums.*;
+import com.example.weclean.domain.enums.CleaningFeature;
+import io.leangen.graphql.annotations.GraphQLArgument;
+import io.leangen.graphql.annotations.GraphQLQuery;
 import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Data
@@ -29,25 +29,53 @@ public class VacuumCleaner implements Serializable {
     @NonNull
     private String model;
 
-    @Column
     @NonNull
-    private String manufacturer;
+    @ManyToOne
+    private Manufacturer manufacturer;
+
+    public void setManufacturer(Manufacturer manufacturer){
+        this.manufacturer = manufacturer;
+    }
+
+    @GraphQLQuery
+    public String getManufacturer() {
+        if(manufacturer == null){
+            return null;
+        }
+        return manufacturer.getName();
+    }
 
     @Column
     @NonNull
     private Double price;
 
     @Column
+    @Enumerated(EnumType.STRING)
     @NonNull
-    private String construction;
+    private Construction construction;
 
     @Column
     @NonNull
-    private String cleaningFeatures;
+    @Enumerated(EnumType.STRING)
+    @ElementCollection(fetch = FetchType.EAGER, targetClass = CleaningFeature.class)
+    private Set<CleaningFeature> cleaningFeatures;
+
+    @GraphQLQuery
+    public Set<String> getCleaningFeatures() {
+        if(cleaningFeatures == null){
+            return  null;
+        }
+        return cleaningFeatures.stream().map(feature->feature.getName()).collect(Collectors.toSet());
+    }
 
     @Column
     @NonNull
-    private String dustCollectorType;
+    private Boolean hasFilter;
+
+    @Column
+    @NonNull
+    @Enumerated(EnumType.STRING)
+    private DustCollectorType dustCollectorType;
 
     @Column
     @NonNull
@@ -59,7 +87,8 @@ public class VacuumCleaner implements Serializable {
 
     @Column
     @NonNull
-    private String powerSource;
+    @Enumerated(EnumType.STRING)
+    private PowerSource powerSource;
 
     @Column
     @NonNull

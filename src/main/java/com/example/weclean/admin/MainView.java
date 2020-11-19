@@ -1,7 +1,10 @@
 package com.example.weclean.admin;
 
+import com.example.weclean.domain.Manufacturer;
 import com.example.weclean.domain.VacuumCleaner;
+import com.example.weclean.helpers.Helpers;
 import com.example.weclean.repo.VacuumCleanerRepository;
+import com.example.weclean.repo.ManufacturerRepository;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -16,6 +19,10 @@ import com.vaadin.flow.theme.Theme;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -25,6 +32,7 @@ import java.util.stream.StreamSupport;
 public class MainView extends VerticalLayout {
 
     private final VacuumCleanerRepository repo;
+    private final ManufacturerRepository manufacturerRepository;
     private final VacuumCleanerEditor editor;
     final Grid<VacuumCleaner> grid;
 
@@ -33,9 +41,10 @@ public class MainView extends VerticalLayout {
     private final Button addNewBtn;
 
     @Autowired
-    public MainView(VacuumCleanerRepository repo, VacuumCleanerEditor editor) {
+    public MainView(VacuumCleanerRepository repo, VacuumCleanerEditor editor, ManufacturerRepository manufacturerRepository) {
         this.repo = repo;
         this.editor = editor;
+        this.manufacturerRepository = manufacturerRepository;
         this.grid = new Grid<>(VacuumCleaner.class);
         this.filter = new TextField();
         this.addNewBtn = new Button("New vacuum cleaner", VaadinIcon.PLUS.create());
@@ -73,7 +82,15 @@ public class MainView extends VerticalLayout {
         if(filterText == null || filterText.isEmpty()) {
             grid.setItems(StreamSupport.stream(repo.findAll().spliterator(), false));
         }else{
-            grid.setItems(StreamSupport.stream(repo.findAllByManufacturerIgnoreCaseContainingOrModelIgnoreCaseContaining(filterText,filterText).spliterator(), false));
+            Optional<Manufacturer> manufacturer = manufacturerRepository.findAllByNameContainsIgnoreCase(filterText);
+            Object[] filteredByManufacturer = new VacuumCleaner[]{};
+            if(manufacturer.isPresent()){
+                filteredByManufacturer = repo.findAllByManufacturer(manufacturer.get()).toArray();
+            }
+
+            Object[] filteredByModel = repo.findAllByModelIgnoreCaseContaining(filterText).toArray();
+
+            grid.setItems(Arrays.stream(Helpers.unionArrays(filteredByManufacturer, filteredByModel)).map(e->(VacuumCleaner)e));
         }
     }
     // end::listCustomers[]

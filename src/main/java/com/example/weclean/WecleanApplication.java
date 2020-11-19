@@ -1,6 +1,11 @@
 package com.example.weclean;
 
-import com.example.weclean.domain.enums.CleaningFeatures;
+import com.example.weclean.domain.Manufacturer;
+import com.example.weclean.domain.enums.CleaningFeature;
+import com.example.weclean.domain.enums.Construction;
+import com.example.weclean.domain.enums.DustCollectorType;
+import com.example.weclean.domain.enums.PowerSource;
+import com.example.weclean.service.ManufacturerService;
 import com.example.weclean.service.VacuumCleanerService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -28,6 +33,8 @@ public class WecleanApplication implements CommandLineRunner{
 
 	@Autowired
 	private VacuumCleanerService vacuumCleanerService;
+	@Autowired
+	private ManufacturerService manufacturerService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(WecleanApplication.class, args);
@@ -43,10 +50,11 @@ public class WecleanApplication implements CommandLineRunner{
 		VCFromFile.read(fileToImport).forEach(importedVC ->
 				vacuumCleanerService.createVacuumCleaner(
 						importedVC.getModel(),
-						importedVC.getManufacturer(),
+						manufacturerService.createManufacturer(importedVC.getManufacturer()),
 						importedVC.getPrice(),
 						importedVC.getConstruction(),
 						importedVC.getCleaningFeatures(),
+						importedVC.getHasFilter(),
 						importedVC.getDustCollectorType(),
 						importedVC.getVolumeOfDustCollector(),
 						importedVC.getPowerConsumption(),
@@ -60,9 +68,8 @@ public class WecleanApplication implements CommandLineRunner{
 
 	private static class VCFromFile {
 		private String model, manufacturer,
-						price, construction,
-						dustCollectorType, volumeOfDustCollector, powerConsumption,
-						powerSource, color, powerCordLength, weight, noiseLevel,discount;
+						price, construction, powerSource, hasFilter, dustCollectorType, volumeOfDustCollector, powerConsumption,
+						color, powerCordLength, weight, noiseLevel, discount;
 		private Set<String> cleaningFeatures;
 
 		static List<VCFromFile> read(String fileToImport) throws IOException {
@@ -82,16 +89,20 @@ public class WecleanApplication implements CommandLineRunner{
 		public Double getPrice() {
 			return Double.parseDouble(price);
 		}
-		public String getConstruction() {
-			return construction;
+		public Construction getConstruction() {
+			return Construction.valueOf(construction);
 		}
 
-		public Set<CleaningFeatures> getCleaningFeatures() {
-			return cleaningFeatures.stream().map(e->CleaningFeatures.valueOf(e)).collect(Collectors.toSet());
+		public Set<CleaningFeature> getCleaningFeatures() {
+			return cleaningFeatures.stream().map(e-> CleaningFeature.valueOf(e)).collect(Collectors.toSet());
 		}
 
-		public String getDustCollectorType() {
-			return dustCollectorType;
+		public Boolean getHasFilter(){
+			return Boolean.valueOf(hasFilter);
+		}
+
+		public DustCollectorType getDustCollectorType() {
+			return DustCollectorType.valueOf(dustCollectorType);
 		}
 
 		public Double getVolumeOfDustCollector() {
@@ -102,8 +113,8 @@ public class WecleanApplication implements CommandLineRunner{
 			return Double.parseDouble(powerConsumption);
 		}
 
-		public String getPowerSource() {
-			return powerSource;
+		public PowerSource getPowerSource() {
+			return PowerSource.valueOf(powerSource);
 		}
 
 		public String getColor() {
