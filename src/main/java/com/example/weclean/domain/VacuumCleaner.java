@@ -1,5 +1,6 @@
 package com.example.weclean.domain;
 
+import com.example.weclean.domain.enums.CleaningFeatures;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
 import io.leangen.graphql.annotations.*;
@@ -8,10 +9,6 @@ import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Null;
-import java.util.Objects;
 import java.io.Serializable;
 
 @Entity
@@ -80,4 +77,11 @@ public class VacuumCleaner implements Serializable {
     @NonNull
     private Double noiseLevel;
 
+    @Column
+    @NonNull
+    private Double discount;
+
+    public Double getOldPrice(){
+       return this.price * discount / 100 + this.price;
+    }
 }

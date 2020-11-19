@@ -1,17 +1,21 @@
 package com.example.weclean.admin;
 
 import com.example.weclean.domain.VacuumCleaner;
+import com.example.weclean.domain.enums.CleaningFeatures;
 import com.example.weclean.repo.VacuumCleanerRepository;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyNotifier;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.listbox.ListBox;
+import com.vaadin.flow.component.listbox.MultiSelectListBox;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
+import com.vaadin.flow.data.provider.DataProvider;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
 import lombok.NonNull;
@@ -33,7 +37,8 @@ public class VacuumCleanerEditor extends VerticalLayout implements KeyNotifier {
     TextField manufacturer = new TextField("Manufacturer");
     NumberField price = new NumberField("Price");
     TextField construction  = new TextField("Construction");
-    TextField cleaningFeatures = new TextField("Cleaning Features");
+
+    MultiSelectListBox<CleaningFeatures> cleaningFeatures = new MultiSelectListBox<>();
     TextField dustCollectorType = new TextField("Dust Collector Type");
     NumberField volumeOfDustCollector = new NumberField("Volume Of Dust Collector");;
     NumberField powerConsumption = new NumberField("Power Consumption");
@@ -65,6 +70,8 @@ public class VacuumCleanerEditor extends VerticalLayout implements KeyNotifier {
 
         formLayout.getStyle().set("overflow-y", "auto");
         formLayout.setMaxHeight("60vh");
+
+        cleaningFeatures.setDataProvider(DataProvider.ofItems(CleaningFeatures.values()));
 
         add(hide, formLayout, actions);
 

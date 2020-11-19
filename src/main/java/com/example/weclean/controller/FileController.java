@@ -48,4 +48,31 @@ public class FileController {
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .body(resource);
     }
+
+    @RequestMapping(path = {"/images/{id}/{fileName}"}, method = RequestMethod.GET)
+    public ResponseEntity images(@PathVariable String id, @PathVariable String fileName) throws IOException {
+        File file = new File("./src/main/resources/static/images/" + id +"/"+fileName);
+        if(!file.exists()){
+            file = new File("./src/main/resources/static/images/" + id +"/other/"+fileName);
+        }
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
+        headers.add("Pragma", "no-cache");
+        headers.add("Expires", "0");
+
+        InputStreamResource resource;
+        try {
+            resource= new InputStreamResource(new FileInputStream(file));
+        }
+        catch(FileNotFoundException exception){
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .contentLength(file.length())
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .body(resource);
+    }
 }

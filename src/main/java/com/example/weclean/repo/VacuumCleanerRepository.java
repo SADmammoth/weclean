@@ -7,5 +7,4 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface VacuumCleanerRepository extends CrudRepository<VacuumCleaner, Integer> {
-List<VacuumCleaner> findAllByManufacturerIgnoreCaseContainingOrModelIgnoreCaseContaining(@NonNull String manufacturer, @NonNull String model);
-}
+List<VacuumCleaner> findAllByManufacturerIgnoreCaseContainingOrModelIgnoreCaseContaining(@NonNull String manufacturer, @NonNull String model);}

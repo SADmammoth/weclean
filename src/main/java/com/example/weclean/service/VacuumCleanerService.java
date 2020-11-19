@@ -1,20 +1,19 @@
 package com.example.weclean.service;
 
+import com.example.weclean.domain.enums.CleaningFeatures;
+import com.example.weclean.domain.enums.Units;
 import com.example.weclean.domain.VacuumCleaner;
 import com.example.weclean.repo.VacuumCleanerRepository;
-import io.leangen.graphql.annotations.GraphQLArgument;
 import io.leangen.graphql.annotations.GraphQLMutation;
 import io.leangen.graphql.annotations.GraphQLNonNull;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
-import java.util.Optional;
 import java.util.stream.StreamSupport;
 
 @Service
@@ -24,11 +23,11 @@ public class VacuumCleanerService {
     private VacuumCleanerRepository vacuumCleanerRepository;
     @Transactional
     @GraphQLMutation
-    public VacuumCleaner createVacuumCleaner( @GraphQLNonNull String model,  @GraphQLNonNull String manufacturer,
-                                              @GraphQLNonNull Double price,  @GraphQLNonNull String construction,  @GraphQLNonNull String cleaningFeatures,
-                                              @GraphQLNonNull String dustCollectorType,  @GraphQLNonNull Double volumeOfDustCollector,  @GraphQLNonNull Double powerConsumption,
-                                              @GraphQLNonNull String powerSource, @GraphQLNonNull  String color,  @GraphQLNonNull Double powerCordLength,  @GraphQLNonNull Double weight,  @GraphQLNonNull Double noiseLevel){
-        return vacuumCleanerRepository.save(new VacuumCleaner(model, manufacturer, price, construction, cleaningFeatures, dustCollectorType, volumeOfDustCollector, powerConsumption, powerSource, color, powerCordLength, weight, noiseLevel));
+    public VacuumCleaner createVacuumCleaner(@GraphQLNonNull String model, @GraphQLNonNull String manufacturer,
+                                             @GraphQLNonNull Double price, @GraphQLNonNull String construction, @GraphQLNonNull Set<CleaningFeatures> cleaningFeatures,
+                                             @GraphQLNonNull String dustCollectorType, @GraphQLNonNull Double volumeOfDustCollector, @GraphQLNonNull Double powerConsumption,
+                                             @GraphQLNonNull String powerSource, @GraphQLNonNull  String color, @GraphQLNonNull Double powerCordLength, @GraphQLNonNull Double weight, @GraphQLNonNull Double noiseLevel, @GraphQLNonNull Double discount){
+        return vacuumCleanerRepository.save(new VacuumCleaner(model, manufacturer, price, construction, cleaningFeatures, dustCollectorType, volumeOfDustCollector, powerConsumption, powerSource, color, powerCordLength, weight, noiseLevel, discount));
     }
 
     @Transactional(readOnly = true)
@@ -52,5 +51,15 @@ public class VacuumCleanerService {
     @GraphQLQuery
     public long total() {
         return vacuumCleanerRepository.count();
+    }
+
+    @GraphQLQuery
+    public String getUnit(@GraphQLNonNull final String fieldName){
+        return Units.valueOf(fieldName).value;
+    }
+
+    @GraphQLQuery
+    public Map<Object, Object> getUnits(){
+        return Arrays.stream(Units.values()).collect(Collectors.toMap(unit->unit, unit->unit.value));
     }
 }
