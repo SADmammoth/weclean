@@ -8,10 +8,13 @@ import io.leangen.graphql.annotations.GraphQLMutation;
 import io.leangen.graphql.annotations.GraphQLNonNull;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.*;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -81,5 +84,69 @@ public class VacuumCleanerService {
     @GraphQLQuery
     public Set<String> getPowerSources(){
         return Arrays.stream(PowerSource.values()).map(e -> e.getName()).collect(Collectors.toSet());
+    }
+
+
+    @GraphQLQuery
+    public Double getMinPrice(){
+        return vacuumCleanerRepository.getMinPrice();
+    }
+    @GraphQLQuery
+    public Double getMaxPrice(){
+        return vacuumCleanerRepository.getMaxPrice();
+    }
+
+    @GraphQLQuery
+    public Double getMinDiscount(){
+        return vacuumCleanerRepository.getMinDiscount();
+    }
+    @GraphQLQuery
+    public Double getMaxDiscount(){
+        return vacuumCleanerRepository.getMaxDiscount();
+    }
+
+    @GraphQLQuery
+    public Double getMinNoiseLevel(){
+        return vacuumCleanerRepository.getMinNoiseLevel();
+    }
+    @GraphQLQuery
+    public Double getMaxNoiseLevel(){
+        return vacuumCleanerRepository.getMaxNoiseLevel();
+    }
+
+    @GraphQLQuery
+    public Double getMinPowerConsumption(){
+        return vacuumCleanerRepository.getMinPowerConsumption();
+    }
+    @GraphQLQuery
+    public Double getMaxPowerConsumption(){
+        return vacuumCleanerRepository.getMaxPowerConsumption();
+    }
+
+    @GraphQLQuery
+    public Double getMinPowerCordLength(){
+        return vacuumCleanerRepository.getMinPowerCordLength();
+    }
+    @GraphQLQuery
+    public Double getMaxPowerCordLength(){
+        return vacuumCleanerRepository.getMaxPowerCordLength();
+    }
+
+    @GraphQLQuery
+    public Double getMinVolumeOfDustCollector(){
+        return vacuumCleanerRepository.getMinVolumeOfDustCollector();
+    }
+    @GraphQLQuery
+    public Double getMaxVolumeOfDustCollector(){
+        return vacuumCleanerRepository.getMaxVolumeOfDustCollector();
+    }
+
+    @GraphQLQuery
+    public Double getMinWeight(){
+        return vacuumCleanerRepository.getMinWeight();
+    }
+    @GraphQLQuery
+    public Double getMaxWeight(){
+        return vacuumCleanerRepository.getMaxWeight();
     }
 }

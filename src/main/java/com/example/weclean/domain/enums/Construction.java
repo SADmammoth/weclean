@@ -1,6 +1,7 @@
 package com.example.weclean.domain.enums;
 
 import io.leangen.graphql.annotations.GraphQLQuery;
+import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
 
 public enum Construction {
     UPRIGHT("upright"), HANDHELD("handheld"), VERTICAL("vertical"), AUTONOMOUS("autonomous");
@@ -11,7 +12,6 @@ public enum Construction {
         this.name = name;
     }
 
-    @GraphQLQuery
     public String getName(){
         return name;
     }

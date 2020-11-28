@@ -1,9 +1,7 @@
 package com.example.weclean.domain.enums;
 
 import io.leangen.graphql.annotations.GraphQLQuery;
-import lombok.*;
-
-import javax.persistence.*;
+import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
 
 public enum CleaningFeature {
     DRY("dust cleaner"), WASHING("washing");
@@ -14,7 +12,6 @@ public enum CleaningFeature {
         this.name = name;
     }
 
-    @GraphQLQuery
     public String getName(){
         return name;
     }

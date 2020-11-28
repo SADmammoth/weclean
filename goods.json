@@ -3,7 +3,7 @@
   "manufacturer": "Samsung",
   "price": 159.0,
   "construction": "UPRIGHT",
-  "cleaningFeatures": ["DRY"],
+  "cleaningFeatures": ["DRY", "WASHING"],
   "hasFilter": true,
   "dustCollectorType": "CONTAINER",
   "volumeOfDustCollector": 1.3,

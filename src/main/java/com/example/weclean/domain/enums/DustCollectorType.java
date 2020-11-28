@@ -1,6 +1,7 @@
 package com.example.weclean.domain.enums;
 
 import io.leangen.graphql.annotations.GraphQLQuery;
+import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
 
 public enum DustCollectorType {
     BAG("bag"), CONTAINER("container");
@@ -11,7 +12,6 @@ public enum DustCollectorType {
         this.name = name;
     }
 
-    @GraphQLQuery
     public String getName(){
         return name;
     }

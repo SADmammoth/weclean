@@ -54,6 +54,11 @@ public class VacuumCleaner implements Serializable {
     @NonNull
     private Construction construction;
 
+    @GraphQLQuery
+    public String getConstructionName() {
+        return construction.getName();
+    }
+
     @Column
     @NonNull
     @Enumerated(EnumType.STRING)
@@ -77,6 +82,11 @@ public class VacuumCleaner implements Serializable {
     @Enumerated(EnumType.STRING)
     private DustCollectorType dustCollectorType;
 
+    @GraphQLQuery
+    public String getDustCollectorTypeName() {
+        return dustCollectorType.getName();
+    }
+
     @Column
     @NonNull
     private Double volumeOfDustCollector;
@@ -89,6 +99,11 @@ public class VacuumCleaner implements Serializable {
     @NonNull
     @Enumerated(EnumType.STRING)
     private PowerSource powerSource;
+
+    @GraphQLQuery
+    public String getPowerSourceName() {
+        return powerSource.getName();
+    }
 
     @Column
     @NonNull

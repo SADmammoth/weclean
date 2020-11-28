@@ -3,6 +3,7 @@ package com.example.weclean.domain;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.leangen.graphql.annotations.GraphQLQuery;
+import lombok.Setter;
 
 import java.io.File;
 import java.io.Serializable;
@@ -10,25 +11,28 @@ import java.io.Serializable;
 public class ImagesList implements Serializable {
     private String thumb;
     private String Image600x600;
-    private String[] others;
+    private String[] others = new String[]{};
 
 
-
-    private static final String defaultExtension = ".jpg";
-    private static final String defaultBasicPath =  "/images/";
+    private final int id;
+    private String extension;
+    private final String basicPath;
 
     ImagesList(int id, String extension, String basicPath){
+        this.extension = extension;
+        this.basicPath = basicPath;
+        this.id = id;
         this.thumb = basicPath + id + "/thumb" + extension;
         this.Image600x600 = basicPath + id + "/600x600" + extension;
-        this.others = this.findImages(id, basicPath);
+        findImages();
     }
 
     ImagesList(int id, String extension){
-        this(id, extension, defaultBasicPath);
+        this(id, extension, "/images/");
     }
 
     ImagesList(int id){
-        this(id, defaultExtension, defaultBasicPath);
+        this(id, ".jpg", "/images/");
     }
 
 
@@ -42,12 +46,12 @@ public class ImagesList implements Serializable {
 
     public String[] getOthers(){return others;}
 
-    private String[] findImages(int id, String basicPath){
+    public void findImages(){
         File folder = new File("./src/main/resources/static/images/" + id + "/other");
         File[] listOfFiles = folder.listFiles();
 
         if(listOfFiles == null){
-            return new String[0];
+            return;
         }
 
         String[] others = new String[listOfFiles.length];
@@ -56,7 +60,11 @@ public class ImagesList implements Serializable {
             others[i] = basicPath + id + "/other/"+ listOfFiles[i].getName();
         }
 
-        return others;
+        this.others = others;
     }
 
+
+    public void setExtension(String extension) {
+        this.extension = extension;
+    }
 }
