@@ -66,7 +66,7 @@ public class VacuumCleaner implements Serializable {
     private Set<CleaningFeature> cleaningFeatures;
 
     @GraphQLQuery
-    public Set<String> getCleaningFeatures() {
+    public Set<String> getCleaningFeaturesNames() {
         if(cleaningFeatures == null){
             return  null;
         }
