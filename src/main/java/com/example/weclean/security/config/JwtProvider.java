@@ -1,4 +1,4 @@
-package com.example.weclean.config;
+package com.example.weclean.security.config;
 
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;

@@ -1,13 +1,12 @@
-package com.example.weclean.controller;
+package com.example.weclean.security.controller;
 
-import com.example.weclean.config.JwtProvider;
-import com.example.weclean.domain.AuthRequest;
-import com.example.weclean.domain.RegistrationRequest;
-import com.example.weclean.domain.User;
-import com.example.weclean.domain.enums.Role;
-import com.example.weclean.service.UserService;
+import com.example.weclean.security.service.UserService;
+import com.example.weclean.security.config.JwtProvider;
+import com.example.weclean.security.domain.AuthRequest;
+import com.example.weclean.security.domain.RegistrationRequest;
+import com.example.weclean.security.domain.Role;
+import com.example.weclean.security.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

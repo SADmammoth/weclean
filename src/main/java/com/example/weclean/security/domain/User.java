@@ -1,6 +1,6 @@
-package com.example.weclean.domain;
+package com.example.weclean.security.domain;
 
-import com.example.weclean.domain.enums.Role;
+import com.example.weclean.security.domain.Role;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 

@@ -1,6 +1,6 @@
-package com.example.weclean.repo;
+package com.example.weclean.security.repo;
 
-import com.example.weclean.domain.User;
+import com.example.weclean.security.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

@@ -1,7 +1,5 @@
-package com.example.weclean.config;
+package com.example.weclean.security.domain;
 
-import com.example.weclean.domain.User;
-import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

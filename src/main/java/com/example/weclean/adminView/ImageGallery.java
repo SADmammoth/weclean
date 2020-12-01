@@ -1,7 +1,6 @@
-package com.example.weclean.admin;
+package com.example.weclean.adminView;
 
 
-import ch.qos.logback.core.Layout;
 import com.example.weclean.helpers.Helpers;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;

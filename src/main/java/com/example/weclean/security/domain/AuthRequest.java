@@ -1,4 +1,4 @@
-package com.example.weclean.domain;
+package com.example.weclean.security.domain;
 
 import lombok.Getter;
 import lombok.NonNull;

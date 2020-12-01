@@ -1,7 +1,8 @@
-package com.example.weclean.service;
+package com.example.weclean.security.service;
 
-import com.example.weclean.config.CustomUserDetails;
-import com.example.weclean.domain.User;
+import com.example.weclean.security.domain.CustomUserDetails;
+import com.example.weclean.security.domain.User;
+import com.example.weclean.security.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

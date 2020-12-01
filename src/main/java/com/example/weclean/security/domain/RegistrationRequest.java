@@ -1,6 +1,5 @@
-package com.example.weclean.domain;
+package com.example.weclean.security.domain;
 
-import com.example.weclean.domain.enums.Role;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;

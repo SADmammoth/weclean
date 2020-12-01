@@ -1,8 +1,7 @@
-package com.example.weclean.service;
+package com.example.weclean.security.service;
 
-import com.example.weclean.domain.User;
-import com.example.weclean.domain.enums.Role;
-import com.example.weclean.repo.UserRepository;
+import com.example.weclean.security.repo.UserRepository;
+import com.example.weclean.security.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
