@@ -9,7 +9,7 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 @Route("login")
-@PageTitle("Login | Vaadin CRM")
+@PageTitle("Login to WECLEAN CMS")
 
 public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 
@@ -23,12 +23,11 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 
         login.setAction("login");
 
-        add(new H1("Vaadin CRM"), login);
+        add(new H1("WECLEAN CMS"), login);
     }
 
     @Override
     public void beforeEnter(BeforeEnterEvent beforeEnterEvent) {
-        // inform the user about an authentication error
         if (beforeEnterEvent.getLocation()
                 .getQueryParameters()
                 .getParameters()

@@ -14,6 +14,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.component.upload.UploadI18N;
 import com.vaadin.flow.router.BeforeEnterEvent;
+import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
@@ -24,6 +25,7 @@ import java.awt.*;
 @Route("admin")
 @SpringComponent
 @UIScope
+@PageTitle("Vacuum cleaners")
 public class WecleanLayout extends AppLayout {
     private final MainView mainView;
     private final VacuumCleanerEditor editor;
@@ -44,14 +46,14 @@ public class WecleanLayout extends AppLayout {
     }
 
     private void createHeader() {
-        H1 logo = new H1("Vaadin CRM");
+        H1 logo = new H1("WECLEAN CMS");
         logo.addClassName("logo");
 
         Anchor logout = new Anchor("logout", "Log out");
 
-        HorizontalLayout header = new HorizontalLayout(new DrawerToggle(), logo, logout);
-        header.expand(logo);
+        HorizontalLayout header = new HorizontalLayout(logo, logout);
         header.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
+        header.setJustifyContentMode(FlexComponent.JustifyContentMode.AROUND);
         header.setWidth("100%");
         header.addClassName("header");
 
