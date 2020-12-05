@@ -17,8 +17,8 @@ public class Manufacturer implements Serializable {
     @Getter
     private int id;
 
-    @Column
     @NonNull
+    @Column(name = "name", updatable = true, nullable = false, unique=true)
     private String name;
 
     @OneToMany(fetch = FetchType.EAGER)

@@ -2,11 +2,13 @@ package com.example.weclean.domain;
 
 import com.example.weclean.domain.enums.*;
 import com.example.weclean.domain.enums.CleaningFeature;
-import io.leangen.graphql.annotations.GraphQLArgument;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import lombok.*;
 
+
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
 import java.io.Serializable;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -48,6 +50,8 @@ public class VacuumCleaner implements Serializable {
 
     @Column
     @NonNull
+    @DecimalMin("0")
+    @DecimalMax("10000")
     private Double price;
 
     @Column
@@ -86,10 +90,14 @@ public class VacuumCleaner implements Serializable {
 
     @Column
     @NonNull
+    @DecimalMin("0.5")
+    @DecimalMax("100")
     private Double volumeOfDustCollector;
 
     @Column
     @NonNull
+    @DecimalMin("0")
+    @DecimalMax("20000")
     private Double powerConsumption;
 
     @Column
@@ -108,18 +116,26 @@ public class VacuumCleaner implements Serializable {
 
     @Column
     @NonNull
+    @DecimalMin("0.1")
+    @DecimalMax("1000")
     private Double powerCordLength;
 
     @Column
     @NonNull
+    @DecimalMin("0.1")
+    @DecimalMax("1000")
     private Double weight;
 
     @Column
     @NonNull
+    @DecimalMin("0")
+    @DecimalMax("200")
     private Double noiseLevel;
 
     @Column
     @NonNull
+    @DecimalMin("0")
+    @DecimalMax("100")
     private Double discount;
 
     public Double getOldPrice(){

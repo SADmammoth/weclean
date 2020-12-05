@@ -26,6 +26,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.upload.Upload;
 import com.vaadin.flow.component.upload.receivers.MemoryBuffer;
 import com.vaadin.flow.component.upload.receivers.MultiFileMemoryBuffer;
+import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.server.StreamResource;
 import com.vaadin.flow.spring.annotation.SpringComponent;
@@ -84,7 +85,7 @@ public class VacuumCleanerEditor extends VerticalLayout implements KeyNotifier {
 
     HorizontalLayout actions = new HorizontalLayout(save, cancel, delete);
 
-    Binder<VacuumCleaner> binder = new Binder<>(VacuumCleaner.class);
+    BeanValidationBinder<VacuumCleaner> binder = new BeanValidationBinder<>(VacuumCleaner.class);
     private ChangeHandler changeHandler;
 
     @Autowired
@@ -154,6 +155,9 @@ public class VacuumCleanerEditor extends VerticalLayout implements KeyNotifier {
         });
 
 
+        binder.forField(manufacturer).bind(VacuumCleaner::getManufacturer, (vc, manufac)->vc.setManufacturer(manufacturerService.createManufacturer(manufac)));
+        binder.bindInstanceFields(this);
+
         formLayout.getStyle().set("overflow-y", "auto");
         formLayout.getStyle().set("padding", "var(--lumo-space-m)");
         formLayout.setMaxHeight("60vh");
@@ -178,9 +182,6 @@ public class VacuumCleanerEditor extends VerticalLayout implements KeyNotifier {
         cover.setSummaryText("Main image");
         cover.addContent(coverImage, mainImage);
         cover.setOpened(true);
-
-        binder.forField(manufacturer).bind(VacuumCleaner::getManufacturer, (vc, manufac)->vc.setManufacturer(manufacturerService.createManufacturer(manufac)));
-        binder.bindInstanceFields(this);
 
 
         add(hide, formLayout, actions);
