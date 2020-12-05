@@ -1,21 +1,27 @@
 importfile: goods.json
+rootpassword:
 spring:
+  jpa:
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+    hibernate:
+      ddl-auto: create
+  datasource:
+    url:
+    username:
+    password:
+    driver-class-name: org.postgresql.Driver
   security:
     basic:
-      enabled: true
-  h2:
-    console:
       enabled: true
   data:
     rest:
       basePath: /api
-
 graphiql:
   mapping: /graphiql
   endpoint:
     graphql: /graphql
   headers:
-    Authorization: bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhcHBsaWNhdGlvbiIsImV4cCI6MTYwNzg5MzIwMH0.A2Yv0P0vbm0F5kXO4FcxqzoogAMH8Bofx4OSbfvwgeLBIGBMSp-oXPwoeJ8nUy6-Nze5lzobC4wFYhJRhlqotw
-
+    Authorization:
 jwt:
-  secret: r52TBzc2FKLMprED
+  secret:

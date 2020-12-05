@@ -28,8 +28,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/admin/**").hasAuthority(Role.ADMIN.getName())
                 .antMatchers("/api/**").hasAuthority(Role.APPLICATION.getName())
+                .antMatchers("/register/**").hasAuthority(Role.APPLICATION.getName())
                 .antMatchers("/graphql/**").hasAuthority(Role.APPLICATION.getName())
-                .antMatchers("/register", "/auth").permitAll().
+                .antMatchers("/auth").permitAll().
                 and().formLogin()
                 .loginPage(LOGIN_URL)
                 .loginProcessingUrl(LOGIN_PROCESSING_URL)

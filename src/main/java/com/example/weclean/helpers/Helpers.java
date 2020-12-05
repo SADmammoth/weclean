@@ -39,7 +39,7 @@ public class Helpers {
     }
 
     public static String getPublicPath(String relativePath){
-        String path = "http://localhost:8080/";
+        String path = "http://localhost:8080";
         return path + relativePath;
     }
 

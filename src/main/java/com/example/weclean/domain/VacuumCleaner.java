@@ -31,6 +31,7 @@ public class VacuumCleaner implements Serializable {
 
     @NonNull
     @ManyToOne
+    @JoinColumn(name="manufacturer")
     private Manufacturer manufacturer;
 
     public void setManufacturer(Manufacturer manufacturer){
@@ -72,10 +73,6 @@ public class VacuumCleaner implements Serializable {
         }
         return cleaningFeatures.stream().map(feature->feature.getName()).collect(Collectors.toSet());
     }
-
-    @Column
-    @NonNull
-    private Boolean hasFilter;
 
     @Column
     @NonNull

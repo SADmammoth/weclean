@@ -10,14 +10,16 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor
+@Table(name = "appusers")
 public class User {
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", updatable = false, nullable = false, unique=true)
     @Getter
-    private String id;
+    private Long id;
 
     @NonNull
+    @Column(name = "login", updatable = true, nullable = false, unique=true)
     private String login;
     @NonNull
     private String password;

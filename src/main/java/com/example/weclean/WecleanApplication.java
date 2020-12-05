@@ -5,6 +5,9 @@ import com.example.weclean.domain.enums.CleaningFeature;
 import com.example.weclean.domain.enums.Construction;
 import com.example.weclean.domain.enums.DustCollectorType;
 import com.example.weclean.domain.enums.PowerSource;
+import com.example.weclean.security.domain.Role;
+import com.example.weclean.security.domain.User;
+import com.example.weclean.security.service.UserService;
 import com.example.weclean.service.ManufacturerService;
 import com.example.weclean.service.VacuumCleanerService;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -30,11 +33,15 @@ import static com.fasterxml.jackson.annotation.PropertyAccessor.FIELD;
 public class WecleanApplication implements CommandLineRunner{
 	@Value("${importfile}")
 	private String importFile;
+	@Value("${rootpassword}")
+	private String rootPassword;
 
 	@Autowired
 	private VacuumCleanerService vacuumCleanerService;
 	@Autowired
 	private ManufacturerService manufacturerService;
+	@Autowired
+	private UserService userService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(WecleanApplication.class, args);
@@ -44,6 +51,21 @@ public class WecleanApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		createVacuumCleaners(importFile);
+		createUsers();
+	}
+
+	private void createUsers(){
+		User root = new User();
+		root.setPassword(rootPassword);
+		root.setLogin("root");
+		root.setRole(Role.ADMIN);
+		userService.saveUser(root);
+
+		User app = new User();
+		app.setPassword(rootPassword);
+		app.setLogin("application");
+		app.setRole(Role.APPLICATION);
+		userService.saveUser(app);
 	}
 
 	private void createVacuumCleaners(String fileToImport) throws IOException {
@@ -54,7 +76,6 @@ public class WecleanApplication implements CommandLineRunner{
 						importedVC.getPrice(),
 						importedVC.getConstruction(),
 						importedVC.getCleaningFeatures(),
-						importedVC.getHasFilter(),
 						importedVC.getDustCollectorType(),
 						importedVC.getVolumeOfDustCollector(),
 						importedVC.getPowerConsumption(),
@@ -68,7 +89,7 @@ public class WecleanApplication implements CommandLineRunner{
 
 	private static class VCFromFile {
 		private String model, manufacturer,
-						price, construction, powerSource, hasFilter, dustCollectorType, volumeOfDustCollector, powerConsumption,
+						price, construction, powerSource, dustCollectorType, volumeOfDustCollector, powerConsumption,
 						color, powerCordLength, weight, noiseLevel, discount;
 		private Set<String> cleaningFeatures;
 
@@ -95,10 +116,6 @@ public class WecleanApplication implements CommandLineRunner{
 
 		public Set<CleaningFeature> getCleaningFeatures() {
 			return cleaningFeatures.stream().map(e-> CleaningFeature.valueOf(e)).collect(Collectors.toSet());
-		}
-
-		public Boolean getHasFilter(){
-			return Boolean.valueOf(hasFilter);
 		}
 
 		public DustCollectorType getDustCollectorType() {

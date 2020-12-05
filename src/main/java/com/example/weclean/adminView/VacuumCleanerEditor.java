@@ -62,9 +62,9 @@ public class VacuumCleanerEditor extends VerticalLayout implements KeyNotifier {
     TextField model = new TextField("Model");
     TextField manufacturer = new TextField("Manufacturer");
     NumberField price = new NumberField("Price");
+    NumberField discount = new NumberField("Discount");
     ComboBox<Construction> construction  = new ComboBox<>("Construction");
     CheckboxGroup<CleaningFeature> cleaningFeatures = new CheckboxGroup<>();
-    Checkbox hasFilter = new Checkbox("Has Filter");
     ComboBox<DustCollectorType> dustCollectorType = new ComboBox<>("Dust Collector Type");
     NumberField volumeOfDustCollector = new NumberField("Volume Of Dust Collector");;
     NumberField powerConsumption = new NumberField("Power Consumption");
@@ -76,7 +76,7 @@ public class VacuumCleanerEditor extends VerticalLayout implements KeyNotifier {
 
     Button hide = new Button("", VaadinIcon.CLOSE.create(), e->setVisible(false));
 
-    FormLayout formLayout = new FormLayout(cover, details, model, manufacturer, price, construction, cleaningFeatures, dustCollectorType, hasFilter, powerConsumption, powerSource, color, powerCordLength, weight, noiseLevel);
+    FormLayout formLayout = new FormLayout(cover, details, model, manufacturer, price, discount, construction, cleaningFeatures, dustCollectorType, volumeOfDustCollector, powerConsumption, powerSource, color, powerCordLength, weight, noiseLevel);
 
     Button save = new Button("Save");
     Button cancel = new Button("Cancel");
