@@ -8,7 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 
 public enum Units {
-    volumeOfDustCollector("m³"), price("USD"), powerConsumption("W"), weight("kg"), noiseLevel("dB"), powerCordLength("m");
+    volumeOfDustCollector("м³"), price("руб."), powerConsumption("W"), weight("кг"), noiseLevel("dB"), powerCordLength("м");
     public final String value;
     Units(String value){
         this.value = value;

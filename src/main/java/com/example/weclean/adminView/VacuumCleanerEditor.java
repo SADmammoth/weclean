@@ -60,28 +60,28 @@ public class VacuumCleanerEditor extends VerticalLayout implements KeyNotifier {
     Image coverImage = new Image();
     Details details = new Details();
     ImageGallery images = new ImageGallery();
-    TextField model = new TextField("Model");
-    TextField manufacturer = new TextField("Manufacturer");
-    NumberField price = new NumberField("Price");
-    NumberField discount = new NumberField("Discount");
-    ComboBox<Construction> construction  = new ComboBox<>("Construction");
+    TextField model = new TextField("Модель");
+    TextField manufacturer = new TextField("Производитель");
+    NumberField price = new NumberField("Цена");
+    NumberField discount = new NumberField("Скидка");
+    ComboBox<Construction> construction  = new ComboBox<>("Конструкция");
     CheckboxGroup<CleaningFeature> cleaningFeatures = new CheckboxGroup<>();
-    ComboBox<DustCollectorType> dustCollectorType = new ComboBox<>("Dust Collector Type");
-    NumberField volumeOfDustCollector = new NumberField("Volume Of Dust Collector");;
-    NumberField powerConsumption = new NumberField("Power Consumption");
-    ComboBox<PowerSource> powerSource = new ComboBox<>("Power Source");
-    TextField color = new TextField("Color");
-    NumberField powerCordLength = new NumberField("Power Cord Length");
-    NumberField weight = new NumberField("Weight");
-    NumberField noiseLevel = new NumberField("Noise Level");
+    ComboBox<DustCollectorType> dustCollectorType = new ComboBox<>("Тип пылесборника");
+    NumberField volumeOfDustCollector = new NumberField("Объем пылесборника");;
+    NumberField powerConsumption = new NumberField("Потребление энергии");
+    ComboBox<PowerSource> powerSource = new ComboBox<>("Источник питания");
+    TextField color = new TextField("Цвет");
+    NumberField powerCordLength = new NumberField("Длина шнура");
+    NumberField weight = new NumberField("Вес");
+    NumberField noiseLevel = new NumberField("Уровень шума");
 
     Button hide = new Button("", VaadinIcon.CLOSE.create(), e->setVisible(false));
 
     FormLayout formLayout = new FormLayout(cover, details, model, manufacturer, price, discount, construction, cleaningFeatures, dustCollectorType, volumeOfDustCollector, powerConsumption, powerSource, color, powerCordLength, weight, noiseLevel);
 
-    Button save = new Button("Save");
-    Button cancel = new Button("Cancel");
-    Button delete = new Button("Delete");
+    Button save = new Button("Сохранить");
+    Button cancel = new Button("Отмена");
+    Button delete = new Button("Удалить");
 
     HorizontalLayout actions = new HorizontalLayout(save, cancel, delete);
 
@@ -165,7 +165,7 @@ public class VacuumCleanerEditor extends VerticalLayout implements KeyNotifier {
 
         cleaningFeatures.setItems(CleaningFeature.values());
 
-        cleaningFeatures.setLabel("Cleaning features");
+        cleaningFeatures.setLabel("Возможности чистки");
         cleaningFeatures.addThemeVariants(CheckboxGroupVariant.LUMO_VERTICAL);
         cleaningFeatures.setItemLabelGenerator(e->e.getName());
 
@@ -177,9 +177,9 @@ public class VacuumCleanerEditor extends VerticalLayout implements KeyNotifier {
 
         dustCollectorType.setItems(DustCollectorType.values());
         dustCollectorType.setItemLabelGenerator(e->e.getName());
-        details.setSummaryText("Images");
+        details.setSummaryText("Картинки");
         details.addContent(images, upload);
-        cover.setSummaryText("Main image");
+        cover.setSummaryText("Главная картинка");
         cover.addContent(coverImage, mainImage);
         cover.setOpened(true);
 

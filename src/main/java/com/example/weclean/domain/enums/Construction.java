@@ -4,7 +4,7 @@ import io.leangen.graphql.annotations.GraphQLQuery;
 import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
 
 public enum Construction {
-    UPRIGHT("upright"), HANDHELD("handheld"), VERTICAL("vertical"), AUTONOMOUS("autonomous");
+    UPRIGHT("стандарт"), HANDHELD("ручной"), VERTICAL("вертикальный"), AUTONOMOUS("автономный");
 
     private String name;
 
